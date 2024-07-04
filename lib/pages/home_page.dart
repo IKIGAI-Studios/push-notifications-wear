@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:push_notifications_wear/widgets/notification_icon_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,18 +9,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FlutterLogo(),
-            SizedBox(
+            NotificationIconWidget(),
+            const SizedBox(
               height: 10,
             ),
-            Center(
-              child: Text("Push Notifications Wear"),
+            const Center(
+              child: Text(
+                "Led Notifications",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
+              ),
             )
           ],
         ),

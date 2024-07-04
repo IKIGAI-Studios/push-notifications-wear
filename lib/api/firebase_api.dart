@@ -25,11 +25,15 @@ class FirebaseApi {
     // if the message is null, return
     if (message == null) return;
 
-    // Navigate to the notification screen
-    navigatorKey.currentState?.pushNamed(
-      '/notification_screen',
-      arguments: message,
-    );
+    // Go to home screen
+    // navigatorKey.currentState?.pushNamed('/');
+    // LA NETA NO SE COMO PA
+
+    // ! Navigate to the notification screen (Creo no funciona esto)
+    // navigatorKey.currentState?.pushNamed(
+    //   '/notification_screen',
+    //   arguments: message,
+    // );
   }
 
   // Handle foreground and background notifications
