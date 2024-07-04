@@ -1,7 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:wear/wear.dart';
+import 'package:push_notifications_wear/api/firebase_api.dart';
+import 'package:push_notifications_wear/firebase_options.dart';
+import 'package:push_notifications_wear/pages/home_page.dart';
+import 'package:push_notifications_wear/pages/notification_page.dart';
 
-void main() {
+final navigatorKey = GlobalKey<NavigatorState>();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseApi().initNotifications();
   runApp(const MyApp());
 }
 
@@ -18,6 +28,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.compact,
       ),
       home: const WatchScreen(),
+      navigatorKey: navigatorKey,
+      routes: {
+        '/notification_screen': (context) => const NotificationPage(),
+      },
     );
   }
 }
@@ -46,23 +60,6 @@ class Counter extends StatefulWidget {
 class _CounterState extends State<Counter> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor:
-            widget.mode == WearMode.active ? Colors.white : Colors.black,
-        body: const SafeArea(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FlutterLogo(),
-            SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: Text("Hola Mundo Wear!!"),
-            )
-          ],
-        )
-      )
-    );
+    return HomePage();
   }
 }
