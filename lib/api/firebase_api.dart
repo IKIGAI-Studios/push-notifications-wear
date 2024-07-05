@@ -1,5 +1,4 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:push_notifications_wear/main.dart';
 
 class FirebaseApi {
   // Instance of Firebase Messaging

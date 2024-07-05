@@ -1,5 +1,6 @@
 import "package:firebase_messaging/firebase_messaging.dart";
 import "package:flutter/material.dart";
+import "package:push_notifications_wear/widgets/notification_icon_widget.dart";
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -8,6 +9,8 @@ class NotificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get notification message and show
     final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
+    String? notificationBody = message.notification?.body;
+
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
@@ -16,17 +19,21 @@ class NotificationPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            message.notification!.title.toString(),
-            style: const TextStyle(color: Colors.white),
+          NotificationIconWidget(
+            initialNotificationState:
+                notificationBody!.toUpperCase().contains("ON"),
           ),
-          Text(
-            message.notification!.body.toString(),
-            style: const TextStyle(color: Colors.white),
+          const SizedBox(
+            height: 10,
           ),
-          Text(
-            message.data.toString(),
-            style: const TextStyle(color: Colors.white),
+          const Center(
+            child: Text(
+              "Led Notifications",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+              ),
+            ),
           ),
         ],
       ),

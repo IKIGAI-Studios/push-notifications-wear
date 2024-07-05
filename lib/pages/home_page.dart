@@ -15,7 +15,9 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            NotificationIconWidget(),
+            NotificationIconWidget(
+              initialNotificationState: false,
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 15,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
