@@ -24,36 +24,41 @@ class _NotificationIconWidgetState extends State<NotificationIconWidget> {
   }
 
   Future<void> initPushNotifications() async {
+    // Suscribirse al tópico de notificaciones
+    await FirebaseMessaging.instance.subscribeToTopic('led');
+
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
-        // Acceder al texto de la notificación
-        String? notificationBody = message.notification?.body;
-
         setState(() {
-          _notificationReceived =
-              notificationBody!.toUpperCase().contains("ON");
+          handleNotification(message);
         });
       }
     });
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      // Acceder al texto de la notificación
-      String? notificationBody = message.notification?.body;
-
       setState(() {
-        // Verificar si la notificación contiene la palabra "ON"
-        _notificationReceived = notificationBody!.toUpperCase().contains("ON");
+        handleNotification(message);
       });
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      // Acceder al texto de la notificación
-      String? notificationBody = message.notification?.body;
-
       setState(() {
-        // Verificar si la notificación contiene la palabra "ON"
-        _notificationReceived = notificationBody!.toUpperCase().contains("ON");
+        handleNotification(message);
       });
+    });
+  }
+
+  // Parsear la notificación
+  void handleNotification(RemoteMessage message) {
+    // ignore: avoid_print
+    print(message);
+    // Acceder al texto de la notificación
+    String? notificationBody = message.notification?.body;
+
+    setState(() {
+      // Verificar si la notificación contiene la palabra "ON"
+      _notificationReceived =
+          notificationBody?.toUpperCase().contains("ON") ?? false;
     });
   }
 
@@ -62,6 +67,7 @@ class _NotificationIconWidgetState extends State<NotificationIconWidget> {
     return IconButton(
       icon: Icon(
         _notificationReceived ? Icons.lightbulb : Icons.lightbulb_outline,
+        color: _notificationReceived ? Colors.blueAccent : Colors.white,
         size: 30,
       ),
       onPressed: () {

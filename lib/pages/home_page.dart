@@ -18,10 +18,10 @@ class _HomePageState extends State<HomePage> {
             NotificationIconWidget(
               initialNotificationState: false,
             ),
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
-            const Center(
+            Center(
               child: Text(
                 "Led Notifications",
                 style: TextStyle(
