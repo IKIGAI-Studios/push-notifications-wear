@@ -51,7 +51,7 @@ class _NotificationIconWidgetState extends State<NotificationIconWidget> {
   // Parsear la notificación
   void handleNotification(RemoteMessage message) {
     // ignore: avoid_print
-    print(message);
+    // print(message.notification?.body);
     // Acceder al texto de la notificación
     String? notificationBody = message.notification?.body;
 

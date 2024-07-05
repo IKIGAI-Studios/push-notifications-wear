@@ -2,7 +2,7 @@
     package="com.example.weartest">
     <uses-feature android:name="android.hardware.type.watch" />
    <application
-        android:label="weartest"
+        android:label="push_notifications-wear"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
